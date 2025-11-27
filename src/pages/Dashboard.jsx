@@ -59,6 +59,13 @@ const Dashboard = () => {
 
     return (
         <div className="dashboard-container">
+            <div className="dashboard-header-actions">
+                <a href="https://edney.it/" className="btn-home">
+                    <i className="bi bi-house-door-fill"></i>
+                    Home
+                </a>
+            </div>
+
             {/* Summary Cards */}
             <section className="summary-cards">
                 <div className="card summary-card">
