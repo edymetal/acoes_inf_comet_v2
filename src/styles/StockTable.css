@@ -108,6 +108,8 @@
     font-size: 0.75rem;
     color: var(--text-secondary);
     border: 1px solid var(--border-color);
+    white-space: nowrap;
+    display: inline-block;
 }
 
 .text-right {
@@ -133,4 +135,18 @@
     .search-bar {
         width: 100%;
     }
+}
+
+.ticker-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.company-logo-sm {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    border-radius: 50%;
+    padding: 2px;
 }

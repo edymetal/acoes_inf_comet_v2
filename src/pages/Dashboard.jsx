@@ -15,7 +15,7 @@ const Dashboard = () => {
                     getStocks(),
                     getMarketSummary()
                 ]);
-                setStocks(stocksData);
+                setStocks(stocksData.filter(s => s.ticker !== 'last_updated'));
                 setMarketSummary(summaryData);
             } catch (error) {
                 console.error("Error fetching data:", error);
@@ -101,8 +101,18 @@ const Dashboard = () => {
                         <i className="bi bi-piggy-bank text-success"></i>
                     </div>
                     <div className="highlight-body">
-                        <h4>{highestYield.ticker}</h4>
-                        <p className="company-name">{highestYield.name}</p>
+                        <div className="highlight-title-row">
+                            <img
+                                src={`https://financialmodelingprep.com/image-stock/${highestYield.ticker}.png`}
+                                alt={highestYield.ticker}
+                                className="company-logo-md"
+                                onError={(e) => { e.target.style.display = 'none' }}
+                            />
+                            <div>
+                                <h4>{highestYield.ticker}</h4>
+                                <p className="company-name">{highestYield.name}</p>
+                            </div>
+                        </div>
                         <div className="highlight-metric">
                             <span className="metric-value">{highestYield.dividendYield}%</span>
                             <span className="metric-label">Yield</span>
@@ -118,8 +128,18 @@ const Dashboard = () => {
                         <i className="bi bi-graph-up text-warning"></i>
                     </div>
                     <div className="highlight-body">
-                        <h4>{highestPE.ticker}</h4>
-                        <p className="company-name">{highestPE.name}</p>
+                        <div className="highlight-title-row">
+                            <img
+                                src={`https://financialmodelingprep.com/image-stock/${highestPE.ticker}.png`}
+                                alt={highestPE.ticker}
+                                className="company-logo-md"
+                                onError={(e) => { e.target.style.display = 'none' }}
+                            />
+                            <div>
+                                <h4>{highestPE.ticker}</h4>
+                                <p className="company-name">{highestPE.name}</p>
+                            </div>
+                        </div>
                         <div className="highlight-metric">
                             <span className="metric-value">{highestPE.pe}</span>
                             <span className="metric-label">P/L</span>
@@ -135,8 +155,18 @@ const Dashboard = () => {
                         <i className="bi bi-graph-down text-info"></i>
                     </div>
                     <div className="highlight-body">
-                        <h4>{lowestPE.ticker}</h4>
-                        <p className="company-name">{lowestPE.name}</p>
+                        <div className="highlight-title-row">
+                            <img
+                                src={`https://financialmodelingprep.com/image-stock/${lowestPE.ticker}.png`}
+                                alt={lowestPE.ticker}
+                                className="company-logo-md"
+                                onError={(e) => { e.target.style.display = 'none' }}
+                            />
+                            <div>
+                                <h4>{lowestPE.ticker}</h4>
+                                <p className="company-name">{lowestPE.name}</p>
+                            </div>
+                        </div>
                         <div className="highlight-metric">
                             <span className="metric-value">{lowestPE.pe}</span>
                             <span className="metric-label">P/L</span>
@@ -152,10 +182,20 @@ const Dashboard = () => {
                         <i className="bi bi-arrow-up-right text-success"></i>
                     </div>
                     <div className="highlight-body">
-                        <h4>{highestGain.ticker}</h4>
-                        <p className="company-name">{highestGain.name}</p>
+                        <div className="highlight-title-row">
+                            <img
+                                src={`https://financialmodelingprep.com/image-stock/${highestGain.ticker}.png`}
+                                alt={highestGain.ticker}
+                                className="company-logo-md"
+                                onError={(e) => { e.target.style.display = 'none' }}
+                            />
+                            <div>
+                                <h4>{highestGain.ticker}</h4>
+                                <p className="company-name">{highestGain.name}</p>
+                            </div>
+                        </div>
                         <div className="highlight-metric">
-                            <span className="metric-value text-success">+{highestGain.changePercent}%</span>
+                            <span className="metric-value text-success">+{highestGain.changePercent.toFixed(2)}%</span>
                             <span className="metric-label">Variação</span>
                         </div>
                         <Link to={`/stocks/${highestGain.ticker}`} className="btn-link">Ver Detalhes</Link>
@@ -180,7 +220,17 @@ const Dashboard = () => {
                         <tbody>
                             {nearHigh.slice(0, 5).map(stock => (
                                 <tr key={stock.ticker}>
-                                    <td><Link to={`/stocks/${stock.ticker}`} className="ticker-link">{stock.ticker}</Link></td>
+                                    <td>
+                                        <div className="ticker-wrapper">
+                                            <img
+                                                src={`https://financialmodelingprep.com/image-stock/${stock.ticker}.png`}
+                                                alt={stock.ticker}
+                                                className="company-logo-sm"
+                                                onError={(e) => { e.target.style.display = 'none' }}
+                                            />
+                                            <Link to={`/stocks/${stock.ticker}`} className="ticker-link">{stock.ticker}</Link>
+                                        </div>
+                                    </td>
                                     <td>{formatCurrency(stock.price)}</td>
                                     <td>{formatCurrency(stock.high52)}</td>
                                     <td className="text-success">

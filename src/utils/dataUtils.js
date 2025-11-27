@@ -1,8 +1,31 @@
-import rawData from '../../db/dados_acoes.json';
+import rawDataString from '../assets/dados_acoes.txt?raw';
+
+const parseStockData = (jsonString) => {
+    try {
+        // Replace NaN, Infinity, -Infinity with null
+        // We use a regex that matches these values when they are values in JSON (after a colon)
+        // or just globally if we want to be aggressive, but let's be safe.
+        // Typically in JSON dump they appear as: "key": NaN
+        const sanitizedString = jsonString
+            .replace(/:\s*NaN/g, ': null')
+            .replace(/:\s*Infinity/g, ': null')
+            .replace(/:\s*-Infinity/g, ': null');
+
+        return JSON.parse(sanitizedString);
+    } catch (error) {
+        console.error("Failed to parse stock data:", error);
+        return {};
+    }
+};
+
+const rawData = parseStockData(rawDataString);
 
 // Adapter to transform the dictionary format to the array format expected by the app
 const adaptStockData = (data) => {
     return Object.entries(data).map(([ticker, stockData]) => {
+        // Handle case where stockData might be null or undefined
+        if (!stockData) return null;
+
         const info = stockData.info || {};
         const history = stockData.historico || [];
 
@@ -27,13 +50,13 @@ const adaptStockData = (data) => {
             description: info.longBusinessSummary || "Descrição não disponível.",
             history: formattedHistory,
             variationMean: info.percentual_diferenca_media || 0,
-            aboveHigh12M: info.fiftyTwoWeekHigh ? ((info.currentPrice - info.fiftyTwoWeekHigh) / info.fiftyTwoWeekHigh) * 100 : 0,
+            aboveHigh12M: (info.fiftyTwoWeekHigh && info.currentPrice) ? ((info.currentPrice - info.fiftyTwoWeekHigh) / info.fiftyTwoWeekHigh) * 100 : 0,
             changePercent12M: info.fiftyTwoWeekChangePercent || 0
         };
-    });
+    }).filter(item => item !== null); // Filter out null items
 };
 
-const stocksData = adaptStockData(rawData);
+const stocksData = adaptStockData(rawData).filter(stock => stock.ticker !== 'last_updated');
 
 export const getStocks = () => {
     return new Promise((resolve) => {

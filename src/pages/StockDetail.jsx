@@ -45,7 +45,15 @@ const StockDetail = () => {
             <div className="detail-header">
                 <div className="header-title">
                     <Link to="/stocks" className="back-link"><i className="bi bi-arrow-left"></i> Voltar</Link>
-                    <h1>{stock.name} <span className="ticker-badge">{stock.ticker}</span></h1>
+                    <div className="title-with-logo">
+                        <img
+                            src={`https://financialmodelingprep.com/image-stock/${stock.ticker}.png`}
+                            alt={stock.ticker}
+                            className="company-logo-lg"
+                            onError={(e) => { e.target.style.display = 'none' }}
+                        />
+                        <h1>{stock.name} <span className="ticker-badge">{stock.ticker}</span></h1>
+                    </div>
                     <span className="sector-tag">{stock.sector}</span>
                 </div>
                 <div className="header-price">
@@ -67,28 +75,46 @@ const StockDetail = () => {
                 {/* Financial Cards */}
                 <div className="financial-grid">
                     <div className="card stat-card">
-                        <span className="stat-label">Cap. Mercado</span>
-                        <span className="stat-value">${formatLargeNumber(stock.marketCap)}</span>
+                        <div className="stat-icon"><i className="bi bi-building"></i></div>
+                        <div className="stat-content">
+                            <span className="stat-label">Cap. Mercado</span>
+                            <span className="stat-value">${formatLargeNumber(stock.marketCap)}</span>
+                        </div>
                     </div>
                     <div className="card stat-card">
-                        <span className="stat-label">P/L (P/E)</span>
-                        <span className="stat-value">{stock.pe}</span>
+                        <div className="stat-icon"><i className="bi bi-graph-up"></i></div>
+                        <div className="stat-content">
+                            <span className="stat-label">P/L (P/E)</span>
+                            <span className="stat-value">{stock.pe}</span>
+                        </div>
                     </div>
                     <div className="card stat-card">
-                        <span className="stat-label">Div. Yield</span>
-                        <span className="stat-value">{stock.dividendYield}%</span>
+                        <div className="stat-icon"><i className="bi bi-cash-coin"></i></div>
+                        <div className="stat-content">
+                            <span className="stat-label">Div. Yield</span>
+                            <span className="stat-value">{stock.dividendYield}%</span>
+                        </div>
                     </div>
                     <div className="card stat-card">
-                        <span className="stat-label">Máxima 52s</span>
-                        <span className="stat-value">{formatCurrency(stock.high52)}</span>
+                        <div className="stat-icon"><i className="bi bi-arrow-up-circle"></i></div>
+                        <div className="stat-content">
+                            <span className="stat-label">Máxima 52s</span>
+                            <span className="stat-value">{formatCurrency(stock.high52)}</span>
+                        </div>
                     </div>
                     <div className="card stat-card">
-                        <span className="stat-label">Mínima 52s</span>
-                        <span className="stat-value">{formatCurrency(stock.low52)}</span>
+                        <div className="stat-icon"><i className="bi bi-arrow-down-circle"></i></div>
+                        <div className="stat-content">
+                            <span className="stat-label">Mínima 52s</span>
+                            <span className="stat-value">{formatCurrency(stock.low52)}</span>
+                        </div>
                     </div>
                     <div className="card stat-card">
-                        <span className="stat-label">Preço/Vendas</span>
-                        <span className="stat-value">{(stock.pe * 0.15).toFixed(2)}</span> {/* Mock calc */}
+                        <div className="stat-icon"><i className="bi bi-receipt"></i></div>
+                        <div className="stat-content">
+                            <span className="stat-label">Preço/Vendas</span>
+                            <span className="stat-value">{(stock.pe * 0.15).toFixed(2)}</span> {/* Mock calc */}
+                        </div>
                     </div>
                 </div>
 

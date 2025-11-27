@@ -84,9 +84,17 @@ const StockTable = ({ stocks }) => {
                         {filteredStocks.map(stock => (
                             <tr key={stock.ticker}>
                                 <td>
-                                    <Link to={`/stocks/${stock.ticker}`} className="ticker-cell">
-                                        {stock.ticker}
-                                    </Link>
+                                    <div className="ticker-wrapper">
+                                        <img
+                                            src={`https://financialmodelingprep.com/image-stock/${stock.ticker}.png`}
+                                            alt={stock.ticker}
+                                            className="company-logo-sm"
+                                            onError={(e) => { e.target.style.display = 'none' }}
+                                        />
+                                        <Link to={`/stocks/${stock.ticker}`} className="ticker-cell">
+                                            {stock.ticker}
+                                        </Link>
+                                    </div>
                                 </td>
                                 <td>{stock.name}</td>
                                 <td><span className="sector-badge">{stock.sector}</span></td>
@@ -113,7 +121,7 @@ const StockTable = ({ stocks }) => {
                     </tbody>
                 </table>
             </div>
-        </div>
+        </div >
     );
 };
 
