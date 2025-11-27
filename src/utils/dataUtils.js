@@ -67,7 +67,7 @@ export const getMarketSummary = () => {
             resolve({
                 totalStocks,
                 avgMarketCap,
-                lastUpdated: new Date().toLocaleDateString('pt-BR')
+                lastUpdated: new Intl.DateTimeFormat('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date())
             });
         }, 300);
     });

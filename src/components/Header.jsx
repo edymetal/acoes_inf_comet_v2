@@ -3,7 +3,6 @@ import '../styles/Header.css';
 
 const Header = ({ toggleSidebar }) => {
     const today = new Date().toLocaleDateString('pt-BR', {
-        weekday: 'long',
         year: 'numeric',
         month: 'long',
         day: 'numeric'

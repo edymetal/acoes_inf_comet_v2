@@ -55,11 +55,11 @@
 }
 
 .stock-table .text-success {
-    color: var(--success);
+    color: var(--success) !important;
 }
 
 .stock-table .text-danger {
-    color: var(--danger);
+    color: var(--danger) !important;
 }
 
 /* Scrollbar */
