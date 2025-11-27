@@ -27,7 +27,8 @@ const adaptStockData = (data) => {
             description: info.longBusinessSummary || "Descrição não disponível.",
             history: formattedHistory,
             variationMean: info.percentual_diferenca_media || 0,
-            aboveHigh12M: info.fiftyTwoWeekHigh ? ((info.currentPrice - info.fiftyTwoWeekHigh) / info.fiftyTwoWeekHigh) * 100 : 0
+            aboveHigh12M: info.fiftyTwoWeekHigh ? ((info.currentPrice - info.fiftyTwoWeekHigh) / info.fiftyTwoWeekHigh) * 100 : 0,
+            changePercent12M: info.fiftyTwoWeekChangePercent || 0
         };
     });
 };

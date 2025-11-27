@@ -73,7 +73,7 @@ const StockTable = ({ stocks }) => {
                             <th onClick={() => requestSort('name')}>Empresa {getSortIcon('name')}</th>
                             <th onClick={() => requestSort('sector')}>Setor {getSortIcon('sector')}</th>
                             <th onClick={() => requestSort('price')} className="text-right">Preço {getSortIcon('price')}</th>
-                            <th onClick={() => requestSort('changePercent')} className="text-right">Var % (Dia) {getSortIcon('changePercent')}</th>
+                            <th onClick={() => requestSort('changePercent12M')} className="text-right">Var % (12M) {getSortIcon('changePercent12M')}</th>
                             <th onClick={() => requestSort('dividendYield')} className="text-right">Div. Yield {getSortIcon('dividendYield')}</th>
                             <th onClick={() => requestSort('variationMean')} className="text-right">Var. Média {getSortIcon('variationMean')}</th>
                             <th onClick={() => requestSort('aboveHigh12M')} className="text-center">Acima Máx. 12M {getSortIcon('aboveHigh12M')}</th>
@@ -91,8 +91,8 @@ const StockTable = ({ stocks }) => {
                                 <td>{stock.name}</td>
                                 <td><span className="sector-badge">{stock.sector}</span></td>
                                 <td className="text-right font-mono">{formatCurrency(stock.price)}</td>
-                                <td className={`text-right font-mono ${stock.changePercent >= 0 ? 'text-success' : 'text-danger'}`}>
-                                    {stock.changePercent > 0 ? '+' : ''}{stock.changePercent.toFixed(2)}%
+                                <td className={`text-right font-mono ${stock.changePercent12M >= 0 ? 'text-success' : 'text-danger'}`}>
+                                    {stock.changePercent12M > 0 ? '+' : ''}{stock.changePercent12M.toFixed(2)}%
                                 </td>
 
                                 <td className="text-right font-mono">{stock.dividendYield.toFixed(2)}%</td>

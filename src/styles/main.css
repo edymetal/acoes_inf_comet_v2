@@ -54,11 +54,11 @@
     color: var(--text-secondary);
 }
 
-.text-success {
+.stock-table .text-success {
     color: var(--success);
 }
 
-.text-danger {
+.stock-table .text-danger {
     color: var(--danger);
 }
 
